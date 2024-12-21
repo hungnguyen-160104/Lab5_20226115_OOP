@@ -10,16 +10,14 @@ public class Cart {
     private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
     // Thêm Media vào giỏ hàng
- // Trong Cart
     public void addMedia(Media media) throws LimitExceededException {
         if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
             itemsOrdered.add(media);
             System.out.println(media.getTitle() + " has been added to the cart.");
         } else {
-            throw new LimitExceededException("ERROR: The number of media has reached its limit");
+            throw new LimitExceededException("ERROR: The number of media has reached its limit!");
         }
     }
-
 
     // Các phương thức khác, ví dụ:
     public void removeMedia(Media media) {

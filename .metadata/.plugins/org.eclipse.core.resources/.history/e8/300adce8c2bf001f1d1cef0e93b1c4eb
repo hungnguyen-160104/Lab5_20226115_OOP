@@ -1,12 +1,11 @@
 package hust.soict.dsai.aims.store;
 
 import hust.soict.dsai.aims.media.Media;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.ArrayList;
 
 public class Store {
-    // Sử dụng ObservableList để hỗ trợ JavaFX TableView
-    private ObservableList<Media> itemsInStore = FXCollections.observableArrayList();
+    // Danh sách các sản phẩm trong cửa hàng
+    private ArrayList<Media> itemsInStore = new ArrayList<>();
 
     // Thêm một Media vào cửa hàng
     public void addMedia(Media media) {
@@ -57,7 +56,7 @@ public class Store {
     }
 
     // Lấy danh sách sản phẩm trong cửa hàng
-    public ObservableList<Media> getItemsInStore() {
+    public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
     }
 }

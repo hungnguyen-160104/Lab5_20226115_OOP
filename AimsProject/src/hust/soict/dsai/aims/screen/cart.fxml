@@ -4,8 +4,10 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1">
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="hust.soict.dsai.aims.screen.CartScreen">
 
+    <!-- Khu vực TOP -->
     <top>
         <VBox spacing="5">
             <MenuBar>
@@ -22,8 +24,18 @@
         </VBox>
     </top>
 
+    <!-- Khu vực CENTER -->
     <center>
         <VBox spacing="10" padding="10">
+            <!-- Bộ lọc -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Filter:"/>
+                <TextField fx:id="tfFilter" promptText="Enter keyword"/>
+                <RadioButton text="By ID" fx:id="radioBtnFilterId" toggleGroup="filterCategory"/>
+                <RadioButton text="By Title" fx:id="radioBtnFilterTitle" toggleGroup="filterCategory" selected="true"/>
+            </HBox>
+            
+            <!-- Bảng hiển thị -->
             <TableView fx:id="tblMedia">
                 <columns>
                     <TableColumn text="Title" fx:id="colMediaTitle"/>
@@ -34,7 +46,11 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
             </TableView>
+            
+            <!-- Hiển thị tổng cộng -->
             <Label fx:id="totalLabel" text="Total: 0 $" style="-fx-font-size: 18;" alignment="CENTER_RIGHT"/>
+            
+            <!-- Các nút chức năng -->
             <ButtonBar>
                 <Button text="Play" fx:id="btnPlay"/>
                 <Button text="Remove" fx:id="btnRemove"/>
