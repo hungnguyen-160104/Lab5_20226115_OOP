@@ -1,37 +1,109 @@
 package hust.soict.dsai.aims.screen;
 
+import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.media.Media;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CartController {
+    private Cart cart;
+    private FilteredList<Media> filteredList;
 
     @FXML
-    private TableView<?> cartTable;
+    private TableView<Media> tblMedia;
 
     @FXML
-    private TableColumn<?, ?> titleColumn;
+    private TableColumn<Media, String> colMediaTitle;
 
     @FXML
-    private TableColumn<?, ?> categoryColumn;
+    private TableColumn<Media, String> colMediaCategory;
 
     @FXML
-    private TableColumn<?, ?> costColumn;
+    private TableColumn<Media, Float> colMediaCost;
 
     @FXML
-    private void handlePlay() {
-        System.out.println("Play button clicked!");
-        // Add logic to play the selected item
+    private TextField tfFilter;
+
+    @FXML
+    private RadioButton radioBtnFilterId;
+
+    @FXML
+    private RadioButton radioBtnFilterTitle;
+
+    @FXML
+    private Label totalLabel;
+
+    @FXML
+    private Button btnPlay;
+
+    @FXML
+    private Button btnRemove;
+
+    @FXML
+    private Button btnPlaceOrder;
+
+    public CartController(Cart cart) {
+        this.cart = cart;
     }
 
     @FXML
-    private void handleRemove() {
-        System.out.println("Remove button clicked!");
-        // Add logic to remove the selected item from the cart
+    private void initialize() {
+        // Set up FilteredList
+        filteredList = new FilteredList<>(cart.getItemsInCart(), p -> true);
+        tblMedia.setItems(filteredList);
+
+        // Set up Table Columns
+        colMediaTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colMediaCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        colMediaCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+
+        // Set up filtering
+        tfFilter.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(media -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (radioBtnFilterId.isSelected()) {
+                    return String.valueOf(media.getId()).contains(lowerCaseFilter);
+                } else if (radioBtnFilterTitle.isSelected()) {
+                    return media.getTitle().toLowerCase().contains(lowerCaseFilter);
+                }
+                return false;
+            });
+        });
+
+        // Update total label
+        updateTotalLabel();
+    }
+
+    private void updateTotalLabel() {
+        totalLabel.setText("Total: " + String.format("%.2f $", cart.totalCost()));
     }
 
     @FXML
-    private void handlePlaceOrder() {
-        System.out.println("Place Order button clicked!");
-        // Add logic to process the cart and place the order
+    private void btnRemovePressed() {
+        Media selected = tblMedia.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            cart.removeMedia(selected);
+            updateTotalLabel();
+        }
+    }
+
+    @FXML
+    private void btnPlaceOrderPressed() {
+        System.out.println("Order placed!");
+        cart.clear();
+        updateTotalLabel();
+    }
+
+    @FXML
+    private void btnPlayPressed() {
+        Media selected = tblMedia.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            System.out.println("Playing " + selected.getTitle());
+        }
     }
 }
