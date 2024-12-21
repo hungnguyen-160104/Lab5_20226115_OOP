@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;hust.soict.globalict.swing&apos; to &apos;hust.soict.dsai.swing&apos;&#x0D;&#x0A;- Original project: &apos;GUIProject&apos;&#x0D;&#x0A;- Original element: &apos;GUIProject/src/hust.soict.globalict.swing&apos;&#x0D;&#x0A;- Renamed element: &apos;GUIProject/src/hust.soict.dsai.swing&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;hust.soict.globalict.swing&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;hust.soict.globalict.swing" name="hust.soict.dsai.swing" qualified="false" references="true" stamp="1734161250668" textual="false" version="1.0"/>
+</session>

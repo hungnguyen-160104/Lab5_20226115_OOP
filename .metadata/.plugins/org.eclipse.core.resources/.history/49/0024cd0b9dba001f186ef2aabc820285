@@ -1,0 +1,9 @@
+package hust.soict.dsai.swing;
+
+public class HelloWorld {
+
+	public HelloWorld() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

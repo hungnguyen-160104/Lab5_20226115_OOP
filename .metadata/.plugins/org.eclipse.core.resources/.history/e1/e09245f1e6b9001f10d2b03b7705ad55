@@ -1,0 +1,9 @@
+package hust.soict.globalict.swing;
+
+public class AWTAccumulator {
+
+	public AWTAccumulator() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
